@@ -67,10 +67,6 @@ jobs:
           zip -r -X -y ../VSCodium-darwin-${VSCODE_ARCH}-${MS_TAG}.zip ./*.app
         if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
-
-      - name: Generate shasums
-        run: ./sum.sh
-        if: env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
       
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -79,7 +75,6 @@ jobs:
           tag_name: ${{ env.MS_TAG }}
           files: |
             ./*.zip
-            ./*.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
